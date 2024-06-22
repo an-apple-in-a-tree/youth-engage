@@ -61,25 +61,10 @@ export default async function Page() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase.from("events").insert([
-      {
-        event_name: eventName,
-        short_description: shortDescription,
-        event_link: eventLink,
-        hashtags: hashtags.split(","),
-        start_date: startDate || null,
-        end_date: endDate || null,
-      },
-    ]);
+  function handleSubmit (){
+    console.log("Submitted.");
+  }
 
-    if (error) {
-      console.error("Error inserting event:", error);
-    } else {
-      alert("Event added successfully!");
-    }
-  };
 
   return (
     <div
