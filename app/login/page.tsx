@@ -3,7 +3,11 @@ import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "./submit-button";
-
+import { Lato, Raleway } from "next/font/google";
+const raleway = Raleway({
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
 export default function Login({
   searchParams,
 }: {
@@ -25,7 +29,7 @@ export default function Login({
       return redirect("/login?message=Could not authenticate user");
     }
 
-    return redirect("/protected");
+    return redirect("/pages/browse");
   };
 
   const signUp = async (formData: FormData) => {
@@ -52,7 +56,7 @@ export default function Login({
   };
 
   return (
-    <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+    <div className="flex-1 flex flex-col w-full pt-24 px-8 sm:max-w-md justify-center gap-2">
       <Link
         href="/"
         className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
@@ -73,7 +77,7 @@ export default function Login({
         </svg>{" "}
         Back
       </Link>
-
+      <h5 className={` text-4xl ${raleway.className}`}>Login to your Youth-Engage Account!</h5>
       <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
         <label className="text-md" htmlFor="email">
           Email

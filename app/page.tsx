@@ -1,54 +1,91 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
+import Link from "next/link";
+import "./globals.css";
+import {
+  Lato,
+  Montserrat,
+  Noto_Sans,
+  Nunito_Sans,
+  Open_Sans,
+  Poppins,
+  Raleway,
+  Roboto,
+} from "next/font/google";
 
-export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+const lato = Lato({
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+});
 
-  const isSupabaseConnected = canInitSupabaseClient();
+const montserrat = Montserrat({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
 
+const noto = Noto_Sans({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
+const nunito = Nunito_Sans({
+  weight: ["300", "600", "800"],
+  subsets: ["latin"],
+});
+
+const opensans = Open_Sans({
+  weight: ["300", "400", "600", "700", "800"],
+  subsets: ["latin"],
+});
+
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
+
+const raleway = Raleway({
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
+
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700", "900"],
+  subsets: ["latin"],
+});
+
+export default async function Page() {
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          <DeployButton />
-          {isSupabaseConnected && <AuthButton />}
+    <div className="">
+      <div className="bg-black overflow-y-scroll bg-cover bg-fixed bg-center bg-no-repeat">
+        <div className="flex items-center justify-center h-screen">
+          <h5 className={`text-white text-4xl ${raleway.className}`}>Welcome to...</h5>
+          </div>
+        <div className="mt-40 relative">
+          <div className="parallax">
+            <section className="relative">
+              <img
+                className="w-full"
+                src="https://i.redd.it/r6u7qmca73pb1.jpg"
+                alt="Image"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h1 className="text-white bg-opacity-50 bg-black p-4 px-8 text-6xl font-bold">
+                  Youth Engage!
+                </h1>
+              </div>
+            </section>
+            <section className="relative">
+              <div className="absolute inset-0 flex items-center justify-center py-12">
+                <Link href="/login">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold my-24 py-2 p-4 rounded">
+                    Login to get started.
+                  </button>
+                </Link>
+              </div>
+            </section>
+            
+            <section className="bg-blue-100 text-blue-600"></section>
+          </div>
         </div>
-      </nav>
-
-      <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <Header />
-        <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-        </main>
       </div>
-
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          Powered by{" "}
-          <a
-            href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Supabase
-          </a>
-        </p>
-      </footer>
     </div>
   );
 }
